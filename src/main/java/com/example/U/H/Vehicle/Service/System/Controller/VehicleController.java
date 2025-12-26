@@ -4,6 +4,7 @@ import com.example.U.H.Vehicle.Service.System.Model.VehicleService;
 import com.example.U.H.Vehicle.Service.System.Repository.VehicleRepository;
 import com.example.U.H.Vehicle.Service.System.Service.VehicleServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -23,7 +24,7 @@ public class VehicleController {
     }
 
     @GetMapping("/year/{year}")
-    public List<VehicleService>getVehiclesByServiceYear(@PathVariable Date year){
+    public List<VehicleService>getVehiclesByServiceYear(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date year){
         return vehicleRepository.findByServicedDate(year);
     }
 
@@ -33,7 +34,7 @@ public class VehicleController {
     }
 
     @DeleteMapping("/year/{year}")
-    public String removeVehicleRecords(@PathVariable Date year){
+    public String removeVehicleRecords(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date year){
         vehicleRepository.removeByServicedDate(year);
         return "All vehicle service records for year " + year + " have been deleted.";
     }
