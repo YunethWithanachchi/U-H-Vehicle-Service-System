@@ -22,4 +22,6 @@ public class VehicleService {
     private String type;
     @Column(name = "service_Date",nullable = false)
     private Date servicedDate;
+
+
 }

@@ -4,7 +4,6 @@ import com.example.U.H.Vehicle.Service.System.Model.VehicleService;
 import com.example.U.H.Vehicle.Service.System.Repository.VehicleRepository;
 import com.example.U.H.Vehicle.Service.System.Service.VehicleServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -26,5 +25,16 @@ public class VehicleController {
     @GetMapping("/year/{year}")
     public List<VehicleService>getVehiclesByServiceYear(@PathVariable Date year){
         return vehicleRepository.findByServicedDate(year);
+    }
+
+    @GetMapping("/type/{serviceId}")
+    public String getVehicleType(@PathVariable Long serviceId){
+        return vehicleRepository.findVehicleTypeByServiceId(serviceId);
+    }
+
+    @DeleteMapping("/year/{year}")
+    public String removeVehicleRecords(@PathVariable Date year){
+        vehicleRepository.removeByServicedDate(year);
+        return "All vehicle service records for year " + year + " have been deleted.";
     }
 }
